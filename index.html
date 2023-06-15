@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+ 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/style.css" />
+  <title>johnte ONLINE STOre</title>
+</head>
+
+<body>
+  <header>
+
+  <div class="logo">
+    <img src="../images/logo 1.jpg"  class="logo 1">
+</div>
+
+
+    <div class="nav">
+  
+        <li><a href="../html/my login.html">LOGIN</a></li>
+        <li><a href="../html/cart.html">SHOP NOW</a></li>
+        <li><a href="../html/contacts.html">CONTACT US</a></li>
+        <li><a href="../html/about.html">ABOUT US</a></li>
+      </div>
+</header>
+    <div class="intro">
+     <h1>view our PRODUCTS</h1>
+          <h2>
+            Up to</br>
+            <span class="dis">30% 
+              Discount</span></br>
+            on This <br />
+            New Year Season
+          </h2>
+          <h3>From 1st Jan to 31st Jan</h3>
+          <div class="CART">
+          <a href="../html/cart.html" class="btn">SHOP NOW</a>
+        </div>
+      </div>
+  </header>
+
+  <!-- New Arrivals -->
+  <section class="section">
+    <div class="h">
+      <h1><span>New</span> Arrivals</h1>
+    </div>
+    <div class="item">
+      <img src="../images/handbag.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">women leather handbag</p>
+        <p id="item-price">5000</p>
+        <p id="item-color">pink</p>
+        
+      </div>
+    </div>
+    <div class="item">
+      <img src="../images/handbag.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">women leather handbag</p>
+        <p id="item-price">5000</p>
+        <p id="item-color">pink</p>
+      </div>
+        
+      </div>
+      <div class="item">
+        <img src="../images/belt.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+        <div class="item-info">
+          <p id="item-name">leather belt</p>
+          <p id="item-price">500</p>
+          <p id="item-color">Black</p>
+          
+        </div>
+      </div>
+        <div class="item">
+          <img src="../images/wallet.jpeg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+          <div class="item-info">
+            <p id="item-name">leather wallet</p>
+            <p id="item-price">150</p>
+            <p id="item-color">brown</p>
+            
+          </div>
+        </div>
+        
+        <div class="item">
+            <img src="../images/sandals.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+            <div class="item-info">
+              <p id="item-name">women sandals</p>
+              <p id="item-price">200</p>
+              <p id="item-color">Black</p>
+              
+            </div>
+          </div>
+
+        </section>
+
+<div class="add item">
+  <form id="product-form">
+    <input type="text" id="product-name" placeholder="Product Name" required />
+    <input type="number" id="product-price" placeholder="Product Price" required />
+    <input type="file" id="product-image" accept="image/*" required />
+    <button type="submit">Add to E-commerce</button>
+  </form>
+  
+  <div id="cart-container">
+    <h2>Cart</h2>
+    <ul id="cart-items"></ul>
+    <p id="total-price">Total Price: Ksh 0</p>
+  </div>
+  
+  <script>
+    const productForm = document.getElementById("product-form");
+    const cartItemsElement = document.getElementById("cart-items");
+    const totalPriceElement = document.getElementById("total-price");
+  
+    let cartItems = [];
+    let totalPrice = 0;
+  
+    productForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+  
+      const productName = document.getElementById("product-name").value;
+      const productPrice = Number(document.getElementById("product-price").value);
+      const productImage = document.getElementById("product-image").files[0];
+  
+      const reader = new FileReader();
+      reader.onload = function() {
+        const productImgUrl = reader.result;
+  
+        const product = { name: productName, price: productPrice, image: productImgUrl };
+        cartItems.push(product);
+        totalPrice += productPrice;
+        updateCart();
+      };
+      reader.readAsDataURL(productImage);
+  
+      // Reset the form fields
+      productForm.reset();
+    });
+  
+    function updateCart() {
+      cartItemsElement.innerHTML = "";
+  
+      cartItems.forEach((item) => {
+        const li = document.createElement("li");
+        const img = document.createElement("img");
+        const name = document.createElement("span");
+        const price = document.createElement("span");
+        const addToCartBtn = document.createElement("button");
+  
+        img.src = item.image;
+        img.alt = item.name;
+        img.width = 100;
+        img.height = 100;
+  
+        name.textContent = item.name;
+        price.textContent = `Ksh ${item.price}`;
+  
+        addToCartBtn.textContent = "Add to Cart";
+        addToCartBtn.addEventListener("click", function() {
+          addToCart(item);
+        });
+  
+        li.appendChild(img);
+        li.appendChild(name);
+        li.appendChild(price);
+        li.appendChild(addToCartBtn);
+        cartItemsElement.appendChild(li);
+      });
+  
+      totalPriceElement.textContent = `Total Price: Ksh ${totalPrice}`;
+    }
+  
+    function addToCart(product) {
+      cartItems.push(product);
+      totalPrice += product.price;
+      updateCart();
+    }
+    
+  </script>
+      
+      </div>
+  <section class="section">
+    <div class="h">
+      <h1>Popular <span>Products</span></h1>
+    </div>
+    <div class="item">
+      <img src="../images/retro j1" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">retro j1</p>
+        <p id="item-price">4700</p>
+        <p id="item-color">retro</p>
+        
+      </div>
+    </div>
+
+
+    <div class="item">
+      <img src="../images/red j1.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">3600</p>
+        <p id="item-color">red</p>
+        
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="../images/og blue j1.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">3600</p>
+        <p id="item-color">blue</p>
+        
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="../images/red jordan.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">4000</p>
+        <p id="item-color">red</p>
+        
+      </div>
+    </div>
+    <div class="item">
+      <img src="../images/blue handbag.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">3600</p>
+        <p id="item-color">blue</p>
+        
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="../images/bsandals.jpg" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">3600</p>
+        <p id="item-color">Black</p>
+        
+      </div>
+    </div>
+    <div class="item">
+      <img src="../images/p handbag" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">3600</p>
+        <p id="item-color">purple</p>
+        
+      </div>
+    </div>
+    <div class="item">
+      <img src="../images/mini wallet.jfif" alt="" onclick="showInfo('5000', 'Black', 'Women Handbag Leather')" />
+      <div class="item-info">
+        <p id="item-name">leather</p>
+        <p id="item-price">500</p>
+        <p id="item-color">brown</p>
+        
+      </div>
+    </div>
+    
+
+  </section>
+        <section id="footer">
+            
+            <div class="foot">
+                <ul>
+                    <li><a href="../html/my login.html">LOGIN</a></li>
+                    <li><a href="../html/about.html">ABOUT US</a></li>
+                    <li><a href="../html/contacts.html">CONTACT US</a></li>
+        
+                </ul>
+            </div>
+        </section>
+        
+      
+</body>
+
+</html>
